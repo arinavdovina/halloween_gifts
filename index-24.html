@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#160f26">
+  <meta name="description" content="FRESH HALLOWEEN LOTTERY — выбери свои направления и открой от 1 до 3 секретных призовых кодов.">
+  <title>FRESH HALLOWEEN LOTTERY · Твой spooky Fresh-момент</title>
+  <style>
+    :root{
+      --bg:#120b1e;--bg2:#1d1331;--card:#221636;--card2:#2b1b43;--paper:#2a1d40;--line:#4d356e;
+      --text:#f7f0ff;--muted:#d3c5e6;--soft:#b8a6cf;--orange:#ff8a1f;--orange2:#ffb34d;--purple:#a96cff;
+      --lime:#c9ff6b;--green:#89ffcf;--pink:#ff8ec9;--shadow:0 25px 70px rgba(2,0,8,.42)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:
+      radial-gradient(circle at 10% 10%, rgba(255,138,31,.16), transparent 26%),
+      radial-gradient(circle at 92% 18%, rgba(169,108,255,.18), transparent 24%),
+      radial-gradient(circle at 15% 88%, rgba(137,255,207,.08), transparent 22%),
+      linear-gradient(180deg,var(--bg),var(--bg2));
+      color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.5}
+    button{font:inherit;cursor:pointer}
+    button:focus-visible{outline:3px solid var(--orange2);outline-offset:4px}
+    ::selection{background:rgba(255,138,31,.35);color:#fff}
+    .ambient,.celebration{pointer-events:none;position:fixed;inset:0}
+    .ambient{z-index:-2;overflow:hidden}
+    .ambient::before,.ambient::after{content:"";position:absolute;border-radius:50%;filter:blur(55px);opacity:.45}
+    .ambient::before{width:340px;height:340px;background:rgba(255,138,31,.22);left:-110px;top:-80px}
+    .ambient::after{width:380px;height:380px;background:rgba(169,108,255,.18);right:-120px;top:30px}
+    .page{max-width:1180px;margin:0 auto;padding:0 30px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 0 10px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:900;letter-spacing:.08em;color:#fff;text-transform:uppercase}
+    .brand-logo{display:grid;place-items:center;width:42px;height:42px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#2a1402;border-radius:14px;box-shadow:0 8px 0 rgba(255,179,77,.2);transform:rotate(-7deg);font-size:23px;font-weight:900}
+    .top-meta{font-size:12px;color:#ffd59f;font-weight:900;border:1px solid rgba(255,179,77,.38);background:rgba(255,179,77,.08);border-radius:999px;padding:8px 13px;white-space:nowrap}
+    .layout{display:grid;grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);gap:48px;align-items:start;padding-top:20px;padding-bottom:58px}
+    .hero{padding:20px 0 0;position:relative}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#ffc674;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:900}
+    .eyebrow::before{content:"";width:28px;height:2px;background:linear-gradient(90deg,var(--orange),transparent)}
+    h1{font-size:clamp(44px,5.5vw,76px);line-height:1.02;letter-spacing:-.06em;font-weight:900;margin:22px 0 20px;max-width:680px}
+    h1 em{font-style:normal;color:var(--orange2);text-shadow:0 0 20px rgba(255,138,31,.28)}
+    .subtitle{font-size:18px;color:var(--muted);max-width:470px;line-height:1.68;margin:0 0 30px}
+    .feature-row{display:flex;flex-wrap:wrap;gap:10px;max-width:520px}
+    .feature{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:800;color:#efe5ff}
+    .feature span{font-size:16px}
+    .art{height:300px;position:relative;isolation:isolate;margin-top:32px;max-width:500px}
+    .moon{position:absolute;right:30px;top:4px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #fff9cf, #f8d787 52%, #efb843 100%);box-shadow:0 0 50px rgba(255,206,111,.25)}
+    .moon::after{content:"";position:absolute;inset:12px 8px auto auto;width:88px;height:88px;border-radius:50%;background:rgba(18,11,30,.7)}
+    .fog{position:absolute;left:10px;bottom:18px;width:420px;height:100px;background:radial-gradient(circle at 30% 50%, rgba(255,255,255,.11), transparent 42%),radial-gradient(circle at 65% 55%, rgba(255,255,255,.08), transparent 40%);filter:blur(12px)}
+    .ticket{position:absolute;width:272px;height:158px;border-radius:22px;box-shadow:0 18px 34px rgba(0,0,0,.26);display:flex;flex-direction:column;justify-content:space-between;padding:20px 23px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+    .ticket::after{content:"";position:absolute;top:-15px;right:42px;height:188px;border-left:2px dashed rgba(255,255,255,.28)}
+    .ticket .small{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+    .ticket .main{font-size:30px;line-height:.98;font-weight:950;letter-spacing:-.05em}
+    .ticket .sub{font-size:11px;letter-spacing:.1em;font-weight:800;text-transform:uppercase}
+    .ticket-back{background:linear-gradient(135deg,#43246c,#6c2fa3);color:#fff;transform:rotate(-16deg);top:42px;left:32px}
+    .ticket-mid{background:linear-gradient(135deg,#206152,#35a98f);color:#f3fffb;transform:rotate(11deg);top:70px;left:145px}
+    .ticket-front{background:linear-gradient(135deg,#ff7f11,#ffb84d);color:#281000;transform:rotate(-6deg);top:118px;left:74px}
+    .bat{position:absolute;font-size:26px;opacity:.88}.b1{left:26px;top:12px}.b2{right:112px;top:72px}.b3{left:100px;top:38px;font-size:20px}
+    .spark{position:absolute;font-size:24px;color:#ffd670;font-weight:900}.s1{left:8px;bottom:36px}.s2{right:16px;bottom:18px;color:#9bfad4}.s3{right:120px;top:18px;color:#f5a2ff}
+    .card{background:linear-gradient(180deg,rgba(41,29,64,.96),rgba(33,22,54,.96));border:1px solid rgba(255,255,255,.09);border-radius:28px;box-shadow:var(--shadow);padding:30px 30px 27px;position:relative;backdrop-filter:blur(8px)}
+    .card-cap{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+    .badge{color:#ffd391;font-size:11px;letter-spacing:.12em;font-weight:900;text-transform:uppercase}
+    .dots{display:flex;gap:6px}.dots i{display:block;height:7px;width:7px;border-radius:50%;background:#5d4778}.dots i:first-child{background:var(--orange)}
+    .question{margin:0 0 14px;font-size:22px;font-weight:900;letter-spacing:-.035em}
+    .mini{display:inline-grid;place-items:center;margin-right:9px;width:27px;height:27px;border-radius:50%;background:rgba(255,138,31,.16);color:#ffd392;font-weight:900;font-size:12px;vertical-align:2px;border:1px solid rgba(255,179,77,.3)}
+    .hint{font-size:13px;color:var(--soft);margin:-7px 0 17px 37px}
+    .niches{display:grid;gap:10px}
+    .niche{display:flex;align-items:center;text-align:left;gap:14px;padding:14px 15px;border:1.5px solid rgba(255,255,255,.09);border-radius:17px;background:rgba(255,255,255,.03);transition:background .2s,border-color .2s,transform .2s,box-shadow .2s;width:100%;color:var(--text)}
+    .niche:hover{transform:translateY(-1px);border-color:rgba(255,179,77,.36)}
+    .niche[aria-pressed="true"]{border-color:var(--orange);background:rgba(255,138,31,.11);box-shadow:inset 0 0 0 1px rgba(255,138,31,.28)}
+    .niche-icon{width:47px;height:47px;display:grid;place-items:center;border-radius:14px;background:rgba(255,138,31,.12);font-size:24px;flex-shrink:0}
+    .niche[data-id="blogger"] .niche-icon{background:rgba(255,142,201,.12)}
+    .niche[data-id="ai"] .niche-icon{background:rgba(137,255,207,.12)}
+    .niche-copy{min-width:0;flex:1}.niche-copy strong{display:block;font-size:15px;letter-spacing:-.01em}.niche-copy small{display:block;color:var(--soft);margin-top:2px;font-size:12px}
+    .select-indicator{width:22px;height:22px;border-radius:50%;border:1.7px solid rgba(255,255,255,.18);display:grid;place-items:center;color:#2c1300;font-size:12px;font-weight:900;flex-shrink:0;background:transparent}
+    .niche[aria-pressed="true"] .select-indicator{background:var(--orange);border-color:var(--orange)}
+    .niche[aria-pressed="true"] .select-indicator::after{content:"✓"}
+    .separator{height:1px;background:rgba(255,255,255,.08);margin:28px 0 24px}
+    .amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .amount{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.09);border-radius:16px;padding:14px 0;color:#efebf6;transition:background .2s,transform .2s,border-color .2s}
+    .amount:hover{transform:translateY(-2px)}
+    .amount[aria-pressed="true"]{border-color:var(--purple);background:rgba(169,108,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(169,108,255,.35)}
+    .amount strong{display:block;font-size:29px;font-weight:900;line-height:1.2}
+    .amount span{display:block;font-size:12px;font-weight:750;margin-top:4px;color:var(--muted)}
+    .draw{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;border:0;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#281000;border-radius:17px;padding:18px 19px;font-size:16px;font-weight:900;box-shadow:0 10px 0 rgba(255,138,31,.18);margin-top:27px;transition:transform .15s,box-shadow .15s,filter .15s}
+    .draw:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 12px 0 rgba(255,138,31,.18);filter:saturate(1.06)}
+    .draw:not(:disabled):active{transform:translateY(4px);box-shadow:0 4px 0 rgba(255,138,31,.18)}
+    .draw:disabled{cursor:not-allowed;opacity:.46;box-shadow:none}
+    .microcopy{font-size:12px;color:var(--soft);text-align:center;margin:17px 0 0}
+    .result{display:none;margin-top:7px;animation:showup .45s both}
+    .result.visible{display:block}
+    @keyframes showup{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+    .result-heading{text-align:center;margin-bottom:22px}
+    .result-heading .emoji{font-size:42px;display:block;margin-bottom:8px}
+    .result-heading h2{margin:0 0 9px;font-size:27px;letter-spacing:-.04em;color:#ffcf83}
+    .result-heading p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+    .code-list{display:grid;gap:12px}
+    .code-ticket{display:flex;align-items:center;justify-content:space-between;gap:9px;border:1.5px dashed rgba(255,179,77,.35);background:linear-gradient(120deg,rgba(255,138,31,.08),rgba(169,108,255,.08));border-radius:17px;padding:14px 16px;position:relative;animation:showup .5s both}
+    .code-ticket:nth-child(2){animation-delay:.11s}.code-ticket:nth-child(3){animation-delay:.22s}
+    .code-ticket .slot{display:block;color:#ffbf6d;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+    .code-ticket .code{font-size:clamp(20px,3vw,27px);font-weight:930;color:#fff7e9;letter-spacing:.015em;font-variant-numeric:tabular-nums}
+    .copy-small{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#ffd391;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;flex-shrink:0}
+    .copy-small:hover{background:rgba(255,255,255,.08)}
+    .copy-all{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:13px;background:rgba(137,255,207,.12);border:1px solid rgba(137,255,207,.26);color:#baffea;font-weight:850;margin-top:15px}
+    .copy-all:hover{background:rgba(137,255,207,.17)}
+    .after-note{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:15px;font-size:13px;color:var(--muted);line-height:1.65;margin-top:18px}
+    .after-note strong{color:#fff2d8}
+    .footer{border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0 35px;font-size:12px;color:var(--soft)}
+    .footer b{color:#ffd293}
+    .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,15px);padding:12px 19px;border-radius:12px;background:#fff3df;color:#431e00;font-weight:800;box-shadow:0 10px 26px rgba(12,5,18,.3);opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:10;font-size:13px;white-space:nowrap}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .celebration.active .confetti{animation:fall var(--duration) linear forwards;animation-delay:var(--delay)}
+    .confetti{position:absolute;top:-30px;left:var(--left);width:12px;height:18px;background:var(--color);opacity:0;border-radius:3px;transform:rotate(var(--rotate))}
+    @keyframes fall{0%{opacity:0;transform:translateY(-20px) rotate(0) translateX(0)}10%{opacity:1}100%{opacity:1;transform:translateY(100vh) rotate(540deg) translateX(var(--drift));}}
+    @media (max-width:930px){
+      .layout{grid-template-columns:1fr;gap:18px;padding-top:6px}
+      .hero{padding-top:4px}
+      .subtitle{max-width:unset}
+      .art{height:262px;max-width:430px}
+      .ticket{width:230px;height:142px}
+      .ticket .main{font-size:25px}
+    }
+    @media (max-width:640px){
+      .page{padding:0 18px}
+      .topbar{padding-top:20px}
+      .top-meta{font-size:10px;padding:8px 10px}
+      h1{font-size:42px}
+      .card{padding:22px 18px 21px}
+      .amounts{grid-template-columns:repeat(3,1fr)}
+      .art{height:230px}
+      .ticket{width:192px;height:126px;padding:16px 16px}
+      .ticket-front{top:104px;left:46px}.ticket-mid{top:66px;left:114px}.ticket-back{top:42px;left:18px}
+      .moon{width:88px;height:88px;right:14px}
+      .moon::after{width:70px;height:70px}
+      .footer{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <div id="celebration" class="celebration" aria-hidden="true"></div>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand"><div class="brand-logo">🎃</div><span>Fresh <span style="color:#ffcf83">Halloween</span> Lottery</span></div>
+      <div class="top-meta">✦ SPOOKY GIFT DRAW</div>
+    </header>
+    <main class="layout">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="eyebrow">Trick or Treat · Fresh Edition</div>
+        <h1 id="hero-title">Твой <em>spooky</em> Fresh-момент!</h1>
+        <p class="subtitle">Отмечай одну или несколько ниш, выбирай, сколько призов открыть, и получай свои секретные Fresh-коды. Никаких повторов и пересекающихся призов внутри одного набора — только хэллоуинская удача ✨</p>
+        <div class="feature-row" aria-label="Особенности лотереи">
+          <div class="feature"><span>🎟️</span> 1 билет = 1 приз</div>
+          <div class="feature"><span>🎁</span> 14 видов призов</div>
+          <div class="feature"><span>🕸️</span> Можно выбрать несколько ниш</div>
+          <div class="feature"><span>🎟️</span> До 3 кодов за раз</div>
+        </div>
+        <div class="art" aria-hidden="true">
+          <div class="moon"></div>
+          <div class="ticket ticket-back"><span class="small">FRESH NIGHT</span><span class="main">TRICK OR<br>TREAT</span><span class="sub">mystery inside</span></div>
+          <div class="ticket ticket-mid"><span class="small">HALLOWEEN DRAW</span><span class="main">SPOOKY<br>LUCK</span><span class="sub">fresh • codes • surprise</span></div>
+          <div class="ticket ticket-front"><span class="small">FRESH LOTTERY</span><span class="main">YOU GOT<br>BOO-STED</span><span class="sub">secret gift code</span></div>
+          <div class="fog"></div>
+          <span class="bat b1">🦇</span><span class="bat b2">🦇</span><span class="bat b3">🦇</span>
+          <span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span>
+        </div>
+      </section>
+      <section class="card" aria-label="Генератор призовых кодов">
+        <div class="card-cap"><span class="badge">Выбирай и открывай</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+        <div id="setup">
+          <h2 class="question"><span class="mini">01</span> Какие у тебя ниши?</h2>
+          <p class="hint">Можно выбрать одну или несколько. Рандомайзер соберёт общий пул подходящих призов.</p>
+          <div class="niches" role="group" aria-label="Выбор ниш">
+            <button type="button" class="niche" data-id="teacher" aria-pressed="false"><span class="niche-icon" aria-hidden="true">📚</span><span class="niche-copy"><strong>Преподаватель языков</strong><small>Методика, материалы, игровые уроки</small></span><span class="select-indicator" aria-hidden="true"></span></button>
+            <button type="button" class="niche" data-id="blogger" aria-pressed="false"><span class="niche-icon" aria-hidden="true">📣</span><span class="niche-copy"><strong>Блогер / эксперт</strong><small>Продвижение, аудитория, авторские продукты</small></span><span class="select-indicator" aria-hidden="true"></span></button>
+            <button type="button" class="niche" data-id="ai" aria-pressed="false"><span class="niche-icon" aria-hidden="true">🤖</span><span class="niche-copy"><strong>ИИ и цифровые инструменты</strong><small>Промпты, конструкторы, интерактивы</small></span><span class="select-indicator" aria-hidden="true"></span></button>
+          </div>
+          <div class="separator"></div>
+          <h2 class="question"><span class="mini">02</span> Сколько призов открываем?</h2>
+          <p class="hint">Выбери количество оплаченных билетов (от 1 до 3). Каждый билет даёт один приз. Повторяющихся и пересекающихся призов не будет.</p>
+          <div class="amounts" role="group" aria-label="Выбор количества призов">
+            <button type="button" class="amount" data-count="1" aria-pressed="true"><strong>1</strong><span>приз</span></button>
+            <button type="button" class="amount" data-count="2" aria-pressed="false"><strong>2</strong><span>приза</span></button>
+            <button type="button" class="amount" data-count="3" aria-pressed="false"><strong>3</strong><span>приза</span></button>
+          </div>
+          <button type="button" class="draw" id="draw" disabled><span aria-hidden="true">🎃</span><span>Открыть мои Fresh-коды</span><span aria-hidden="true">↗</span></button>
+          <p class="microcopy">Для участников, которые уже приобрели билеты. Открой свои коды и отправь их организатору. Никаких доплат за призы.</p>
+        </div>
+        <div id="result" class="result" aria-live="polite">
+          <div class="result-heading"><span class="emoji" aria-hidden="true">🎉</span><h2>Твои Fresh-коды готовы!</h2><p id="result-summary"></p></div>
+          <div class="code-list" id="code-list"></div>
+          <button type="button" id="copy-all" class="copy-all"><span aria-hidden="true">▣</span> Скопировать все коды</button>
+          <div class="after-note"><strong>Как забрать приз?</strong> Сохрани коды или сделай скриншот, а затем отправь их организатору лотереи для расшифровки и получения подарков. Каждый код соответствует одному призу. <strong>Доплачивать или оформлять платные подписки для получения приза не нужно.</strong></div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer"><span>Сделано с хэллоуинским вайбом ♥ <b>FreshTeacher</b></span><span>Уникальные коды для 14 видов призов</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+  'use strict';
+  const tickets = [
+    {code:'FRESH143953', niches:['blogger'], group:'advertising'},
+    {code:'FRESH222763', niches:['teacher','ai']},
+    {code:'FRESH534482', niches:['teacher']},
+    {code:'FRESH633482', niches:['teacher','blogger','ai']},
+    {code:'FRESH617085', niches:['teacher'], group:'spotlight'},
+    {code:'FRESH882124', niches:['blogger'], group:'advertising'},
+    {code:'FRESH341146', niches:['teacher','blogger','ai']},
+    {code:'FRESH702069', niches:['teacher'], group:'spotlight'},
+    {code:'FRESH470321', niches:['teacher','blogger','ai']},
+    {code:'FRESH464724', niches:['teacher','ai']},
+    {code:'FRESH227651', niches:['blogger']},
+    {code:'FRESH592988', niches:['teacher']},
+    {code:'FRESH881007', niches:['blogger'], group:'advertising'},
+    {code:'FRESH166354', niches:['teacher'], group:'spotlight'}
+  ];
+  const STORAGE_KEY='fresh_lottery_2026_10_31_halloween_v2';
+  const NICHE_NAMES={teacher:'Преподаватель языков',blogger:'Блогер / эксперт',ai:'ИИ и цифровые инструменты'};
+  let selectedNiches=new Set(), count=1, drawLocked=false;
+  const $=id=>document.getElementById(id);
+  const drawButton=$('draw');
+  const toast=$('toast');
+  let toastTimer;
+  const nicheButtons=[...document.querySelectorAll('.niche')];
+  const countButtons=[...document.querySelectorAll('.amount')];
+
+  function updateDrawState(){ drawButton.disabled=selectedNiches.size===0 || drawLocked; }
+
+  function toggleNiche(value){
+    if(drawLocked)return;
+    if(selectedNiches.has(value)) selectedNiches.delete(value); else selectedNiches.add(value);
+    nicheButtons.forEach(button=>button.setAttribute('aria-pressed', String(selectedNiches.has(button.dataset.id))));
+    updateDrawState();
+  }
+  function chooseCount(value){
+    if(drawLocked)return;
+    count=value;
+    countButtons.forEach(button=>button.setAttribute('aria-pressed', String(Number(button.dataset.count)===value)));
+  }
+  nicheButtons.forEach(button=>button.addEventListener('click',()=>toggleNiche(button.dataset.id)));
+  countButtons.forEach(button=>button.addEventListener('click',()=>chooseCount(Number(button.dataset.count))));
+
+  function randomBelow(max){
+    if(window.crypto && window.crypto.getRandomValues){
+      const space=4294967296;
+      const limit=space-(space%max);
+      const slot=new Uint32Array(1);
+      do{window.crypto.getRandomValues(slot)}while(slot[0]>=limit);
+      return slot[0]%max;
+    }
+    return Math.floor(Math.random()*max);
+  }
+  // Разыгрываем равновероятно среди допустимых наборов, а не выбираем
+  // последовательные билеты вслепую: так нельзя получить два пересекающихся приза.
+  function getValidSets(pool,n){
+    const result=[];
+    function build(from,chosen,groups){
+      if(chosen.length===n){ result.push([...chosen]); return; }
+      for(let i=from;i<=pool.length-(n-chosen.length);i++){
+        const ticket=pool[i];
+        if(ticket.group && groups.has(ticket.group)) continue;
+        chosen.push(ticket);
+        if(ticket.group) groups.add(ticket.group);
+        build(i+1,chosen,groups);
+        chosen.pop();
+        if(ticket.group) groups.delete(ticket.group);
+      }
+    }
+    build(0,[],new Set());
+    return result;
+  }
+  function drawDistinct(pool,n){
+    const validSets=getValidSets(pool,n);
+    if(!validSets.length) return null;
+    const chosen=[...validSets[randomBelow(validSets.length)]];
+    for(let i=chosen.length-1;i>0;i--){
+      const j=randomBelow(i+1);
+      [chosen[i],chosen[j]]=[chosen[j],chosen[i]];
+    }
+    return chosen;
+  }
+  function hasNoOverlap(codes){
+    const groups=new Set();
+    for(const code of codes){
+      const ticket=tickets.find(t=>t.code===code);
+      if(!ticket) return false;
+      if(ticket.group){
+        if(groups.has(ticket.group)) return false;
+        groups.add(ticket.group);
+      }
+    }
+    return true;
+  }
+  function formatNicheSummary(niches){
+    const names=niches.map(id=>NICHE_NAMES[id]).filter(Boolean);
+    return names.join(' + ');
+  }
+  function displayResults(record,animate){
+    drawLocked=true;
+    $('setup').hidden=true;
+    $('result').classList.add('visible');
+    $('result-summary').textContent=`${formatNicheSummary(record.niches)} · ${record.codes.length} ${record.codes.length===1?'приз':record.codes.length<5?'приза':'призов'}`;
+    $('code-list').replaceChildren();
+    record.codes.forEach((code,index)=>{
+      const ticket=document.createElement('div'); ticket.className='code-ticket';
+      const content=document.createElement('div');
+      const slot=document.createElement('span'); slot.className='slot'; slot.textContent='Подарок '+String(index+1).padStart(2,'0');
+      const value=document.createElement('div'); value.className='code'; value.textContent=code;
+      const copy=document.createElement('button'); copy.type='button'; copy.className='copy-small'; copy.title='Скопировать '+code; copy.setAttribute('aria-label','Скопировать '+code); copy.textContent='⧉';
+      copy.addEventListener('click',()=>copyText(code));
+      content.append(slot,value); ticket.append(content,copy); $('code-list').append(ticket);
+    });
+    $('copy-all').onclick=()=>copyText(record.codes.join('\n'));
+    if(animate) celebrate();
+  }
+  function announce(message){
+    toast.textContent=message; toast.classList.add('show'); clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>toast.classList.remove('show'),2200);
+  }
+  async function copyText(value){
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(value);
+      else{
+        const area=document.createElement('textarea'); area.value=value; area.style.position='fixed'; area.style.opacity='0'; document.body.append(area); area.select();
+        if(!document.execCommand('copy')) throw Error('copy failed'); area.remove();
+      }
+      announce('Скопировано! ✨');
+    }catch(error){ announce('Не удалось скопировать — сделайте скриншот'); }
+  }
+  function celebrate(){
+    const node=$('celebration'); node.replaceChildren(); node.classList.add('active');
+    const colors=['#ff8a1f','#ffb34d','#a96cff','#89ffcf','#ff8ec9','#fff1ad'];
+    for(let i=0;i<45;i++){
+      const part=document.createElement('i'); part.className='confetti';
+      part.style.setProperty('--left',randomBelow(100)+'%'); part.style.setProperty('--color',colors[randomBelow(colors.length)]);
+      part.style.setProperty('--delay',(randomBelow(55)/100)+'s'); part.style.setProperty('--duration',(2.3+randomBelow(130)/100)+'s');
+      part.style.setProperty('--rotate',randomBelow(360)+'deg'); part.style.setProperty('--drift',(randomBelow(180)-90)+'px'); node.append(part);
+    }
+    setTimeout(()=>node.classList.remove('active'),4500);
+  }
+
+  drawButton.addEventListener('click',()=>{
+    if(selectedNiches.size===0 || drawLocked) return;
+    const pickedNiches=[...selectedNiches];
+    const eligible=tickets.filter(ticket=>ticket.niches.some(n=>selectedNiches.has(n)));
+    const chosen=drawDistinct(eligible,count);
+    if(!chosen){ announce('Для выбранных ниш недостаточно разных призов'); return; }
+    const codes=chosen.map(t=>t.code);
+    const record={niches:pickedNiches,codes};
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(record)); }catch(error){ /* private browsing */ }
+    displayResults(record,true);
+  });
+
+  try{
+    const previous=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
+    const valid=previous && Array.isArray(previous.niches) && previous.niches.length>=1 &&
+      previous.niches.every(n=>Object.hasOwn(NICHE_NAMES,n)) &&
+      Array.isArray(previous.codes) && previous.codes.length>=1 && previous.codes.length<=3 &&
+      new Set(previous.codes).size===previous.codes.length && hasNoOverlap(previous.codes) &&
+      previous.codes.every(code=>tickets.some(t=>t.code===code && t.niches.some(n=>previous.niches.includes(n))));
+    if(valid) displayResults(previous,false);
+  }catch(error){ /* localStorage unavailable */ }
+  </script>
+</body>
+</html>
